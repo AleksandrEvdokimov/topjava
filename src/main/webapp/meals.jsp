@@ -8,7 +8,7 @@
 <%@page import="ru.javawebinar.topjava.util.TimeUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="ftm" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
     <title>Meals</title>
@@ -28,10 +28,16 @@
         <th>Colories</th>
     </tr>
     </thead>
-    <tr>
-
-
-    </tr>
+    <c:forEach items="${meals}" var="meal">
+        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
+        <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
+            <td>
+                <%=TimeUtil.toString(meal.getDateTime())%>
+            </td>
+            <td>${meal.description}</td>
+            <td>${meal.calories}</td>
+        </tr>
+        </c:forEach>
 </table>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 
 import javax.servlet.ServletException;
@@ -18,8 +19,10 @@ public class MealServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("redirect to meals");
+        request.setAttribute("meals", MealsUtil.getWithExceeded(MealsUtil.MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY));
+        request.getRequestDispatcher("/meals.jsp").forward(request, response);
 
-        response.sendRedirect("meals.jsp");
+        //response.sendRedirect("meals.jsp");
     }
 
 }
